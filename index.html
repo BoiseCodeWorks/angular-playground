@@ -1,0 +1,58 @@
+<!-- ng-app Tells our HTML to use our Angular application as the driver for this page -->
+<html ng-app="angularPlayground">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Angular.js PlayGround</title>
+	<link rel="stylesheet" href="assets/plugins/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<!-- ng-controller Loads a registered controller from our angular App: Naming is crucial -->
+
+<body class="container" ng-controller="MainController as controller">
+	<!--BEING ANGULAR STATUS INDICATOR-->
+	<div class="ng-status-container" ng-controller="AngularStatusInidicator as ngStatus">
+		<div class="alert alert-danger" ng-style="{'background-color': '#dff0d8','color': '#3c763d','border-color':'#d6e9c6'}">Angular is: <span class="ng-status" ng-style="{'display': 'inline-block'}">{{ngStatus.angularStatus}}</span><span ng-hide="true">not working</span></div>
+	</div>
+	<!--END ANGULAR STATUS INDICATOR-->
+
+
+	<div class="jumbotron text-center">
+		<h1>Playground for <img src="https://angularjs.org/img/AngularJS-large.png" height="70" alt="Angular.js"></h1>		
+	</div>
+	<div class="panel panel-default" ng-controller="ViewManager as vm">
+		<div class="panel-heading">
+			<ul class="nav nav-pills">
+				<li ng-class="{'active': vm.view === 'home'}"><a href="#home" ng-click="vm.changeView('home')">Home</a></li>
+				<li ng-class="{'active': vm.view === 'start'}"><a href="#start" ng-click="vm.changeView('start')">Getting Started</a></li>
+				<li ng-class="{'active': vm.view === 'expressions'}"><a href="#expressions" ng-click="vm.changeView('expressions')">Expressions</a></li>
+				<li ng-class="{'active': vm.view === 'bindings'}"><a href="#bindings" ng-click="vm.changeView('bindings')">Bindings</a></li>
+				<li ng-class="{'active': vm.view === 'repeat'}"><a href="#repeat" ng-click="vm.changeView('repeat')">Repeating</a></li>
+			</ul>
+		</div>
+		<div class="panel-body">
+			<div ng-include="'app/views/home.html'" ng-if="vm.view === 'home'"></div>
+			<div ng-include="'app/views/start.html'" ng-if="vm.view === 'start'"></div>
+			<div ng-include="'app/views/expressions.html'" ng-if="vm.view === 'expressions'"></div>
+			<div ng-include="'app/views/bindings.html'" ng-if="vm.view === 'bindings'"></div>
+			<div ng-include="'app/views/repeating.html'" ng-if="vm.view === 'repeat'"></div>
+		</div>
+	</div>
+
+
+
+
+	<!--Load Asset Libraries-->
+	<!--Notice the order of loading libraries is important JQuery, Bootstrap, Angular-->
+	<script src="assets/plugins/jquery/dist/jquery.js" type="text/javascript"></script>
+	<script src="assets/plugins/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+	<script src="assets/plugins/angular/angular.js" type="text/javascript"></script>
+
+	<!--Load Custom Application and Utilities-->
+	<script src="app/app.js" type="text/javascript"></script>
+	<script src="app/utilities/angular-status-indicator.js" type="text/javascript"></script>
+	<script src="app/utilities/view-manager.js" type="text/javascript"></script>
+
+</body>
+
+</html>

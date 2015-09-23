@@ -1,0 +1,14 @@
+.ng-status-container{
+	position: absolute;
+	top: 0;
+	right:0;
+}
+.ng-status{
+	display: none;
+}
+.ng-red-light{
+	background-color: #DD1B16;
+}
+.ng-red-dark{
+	background-color: #A6120D; 
+}
