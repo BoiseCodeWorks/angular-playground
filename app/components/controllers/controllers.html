@@ -1,0 +1,53 @@
+<small class="alert alert-success">ControllersController Status: {{controller.controllersStatus}}</small>
+<div class="readme">
+	<h1>Controllers The Meat of your application</h1>
+	<p ng-non-bindable>You have now seen that when you bind an element to a property on a controller using either ng-model="controller.someProp"
+		or with the double curlies {{}} your page will automatically update</p>
+	<p>Lets now dive into a controller and start writting some functions</p>
+	<ul class="list-group">
+		<li class="list-group-item">
+			<h4>controller.js</h4>
+			<pre><code class="language-javascript" prism>
+var app = angular.module('angularPlayground');
+
+angular.controller('ControllersController', ControllersController);
+
+function ControllersController(){
+	//write your functions here 
+	//Remember this function is a constructor
+	//Because of the way angular was written 
+	//only the properties put on this will be accessible to the view
+}
+			</code></pre>
+		</li>
+	</ul>
+	<hr>
+	<!-- Once you have read up on Expressions go ahead and start editing the html below-->
+	<div class="ng-exercises">
+		<h1>Exercises</h1>
+		<div class="challenges">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span class="challenge">
+				create a property in the constructor called friends which will be an array of strings 
+				['Joey', 'Chandler', 'Monica', 'Phebes', 'Ross & Rachel'];
+			</span>
+					<div class="answer">
+						<ul class="list-group">
+							<li ng-repeat="friend in controller.friends">{{friend}}</li>
+						</ul>
+					</div>
+				</li>
+				<li class="list-group-item">
+					<span class="challenge">Write a function called addFriend that will take the input from ng-model="controller.newFriend" If done correctly you should see your new friend pop up on the list above once you click submit</span>
+					<div class="answer">
+						<ul class="list-group" style="width: 50%">
+							<input ng-model="controller.newFriend" />
+							<button ng-click="controller.addFriend()">Add Friend</button>
+							<p><small>Don't forget to clear the input box when you add a friend</small></p>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>

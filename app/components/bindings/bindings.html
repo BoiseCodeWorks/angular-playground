@@ -1,0 +1,47 @@
+<small class="alert alert-success">BindingsController Status: {{controller.bindingStatus}}</small>
+<div class="readme">
+	<h1>Bindings</h1>
+	<p ng-non-bindable>So we have learned that using the double curlies {{ }} allows us to run javascript code directly from our html. We also
+		know that we have access to our controller object and can get its properties to render on the page as well.</p>
+	<p>Another method of bring in properties from our controller is to use another ng- directive called <b>ng-model</b></p>
+	<p>For example</p>
+	<ul class="list-group">
+		<li class="list-group-item">
+			<h4>Binding our Controller and View</h4>
+			<pre><code class="language-html" prism>
+&lt;input ng-model="controller.name" /&gt;
+&lt;div&gt;
+	&lt;p&gt;
+		Hello <span ng-non-bindable>{{controller.name}},</span>
+	&lt;/p&gt;
+&lt;/div&gt;
+			</code></pre>
+		</li>
+		<li class="list-group-item">
+			<p>Go ahead and edit the input field whatch what happens</p>
+			<div style="width: 50%">
+				<input ng-model="controller.name" class="form-control" />
+			</div>
+			<div>
+				<h1>Hello {{controller.name}},</h1>
+				<p>Isn't Angular impressive the way it can bind your view and your javascript with such little code. No need to call update()
+					anywhere because of the view is already bound to the property of the object. When the JavaScript changes the view changes.</p>
+			</div>
+		</li>
+	</ul>
+	<hr>
+	<!-- Once you have read up on Expressions go ahead and start editing the html below-->
+	<div class="ng-exercises">
+		<h1>Exercises</h1>
+		<div class="challenges">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span class="challenge">Angular controllers allow you to create properties on the fly try creating an input that is bound using ng-model to controller.somethingOfYourChoice. Then render what you type into the input field by binding it with the double curlies</span>
+					<div class="answer">
+						<!--Your HTML input Here-->
+						{{<!--Your Code Here-->}}
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>

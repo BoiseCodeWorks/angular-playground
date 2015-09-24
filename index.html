@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Angular.js PlayGround</title>
 	<link rel="stylesheet" href="assets/plugins/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/plugins/prism/prism.css">
 	<link rel="stylesheet" href="assets/css/site.css">
 </head>
 <!-- ng-controller Loads a registered controller from our angular App: Naming is crucial -->
@@ -27,15 +28,19 @@
 				<li ng-class="{'active': vm.view === 'start'}"><a href="#start" ng-click="vm.changeView('start')">Getting Started</a></li>
 				<li ng-class="{'active': vm.view === 'expressions'}"><a href="#expressions" ng-click="vm.changeView('expressions')">Expressions</a></li>
 				<li ng-class="{'active': vm.view === 'bindings'}"><a href="#bindings" ng-click="vm.changeView('bindings')">Bindings</a></li>
+				<li ng-class="{'active': vm.view === 'controllers'}"><a href="#controllers" ng-click="vm.changeView('controllers')">Controllers</a></li>
 				<li ng-class="{'active': vm.view === 'repeat'}"><a href="#repeat" ng-click="vm.changeView('repeat')">Repeating</a></li>
+				<li ng-class="{'active': vm.view === 'services'}"><a href="#services" ng-click="vm.changeView('services')">Services</a></li>
 			</ul>
 		</div>
 		<div class="panel-body">
-			<div ng-include="'app/views/home.html'" ng-if="vm.view === 'home'"></div>
-			<div ng-include="'app/views/start.html'" ng-if="vm.view === 'start'"></div>
-			<div ng-include="'app/views/expressions.html'" ng-if="vm.view === 'expressions'"></div>
-			<div ng-include="'app/views/bindings.html'" ng-if="vm.view === 'bindings'"></div>
-			<div ng-include="'app/views/repeating.html'" ng-if="vm.view === 'repeat'"></div>
+			<div ng-controller="HomeController as controller" ng-include="'app/components/home/home.html'" ng-if="vm.view === 'home'"></div>
+			<div ng-controller="StartController as controller" ng-include="'app/components/start/start.html'" ng-if="vm.view === 'start'"></div>
+			<div ng-controller="ExpressionsController as controller" ng-include="'app/components/expressions/expressions.html'" ng-if="vm.view === 'expressions'"></div>
+			<div ng-controller="BindingsController as controller" ng-include="'app/components/bindings/bindings.html'" ng-if="vm.view === 'bindings'"></div>
+			<div ng-controller="RepeatController as controller" ng-include="'app/components/repeat/repeating.html'" ng-if="vm.view === 'repeat'"></div>
+			<div ng-controller="ControllersController as controller" ng-include="'app/components/controllers/controllers.html'" ng-if="vm.view === 'controllers'"></div>
+			<div ng-controller="ServicesController as controller" ng-include="'app/components/services/services.html'" ng-if="vm.view === 'services'"></div>
 		</div>
 	</div>
 
@@ -47,11 +52,24 @@
 	<script src="assets/plugins/jquery/dist/jquery.js" type="text/javascript"></script>
 	<script src="assets/plugins/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
 	<script src="assets/plugins/angular/angular.js" type="text/javascript"></script>
+	<script src="assets/plugins/prism/prism.js" type="text/javascript"></script>
 
 	<!--Load Custom Application and Utilities-->
 	<script src="app/app.js" type="text/javascript"></script>
 	<script src="app/utilities/angular-status-indicator.js" type="text/javascript"></script>
 	<script src="app/utilities/view-manager.js" type="text/javascript"></script>
+	<script src="app/utilities/ng-prism.js" type="text/javascript"></script>
+	
+	<!--Load Custom Services-->
+	
+	<!--Load Custom Component Controllers-->
+	<script src="app/components/expressions/ExpressionsController.js" type="text/javascript"></script>
+	<script src="app/components/home/HomeController.js" type="text/javascript"></script>
+	<script src="app/components/repeat/RepeatController.js" type="text/javascript"></script>
+	<script src="app/components/services/ServicesController.js" type="text/javascript"></script>
+	<script src="app/components/start/StartController.js" type="text/javascript"></script>
+	<script src="app/components/bindings/BindingsController.js" type="text/javascript"></script>
+	<script src="app/components/controllers/ControllersController.js" type="text/javascript"></script>
 
 </body>
 

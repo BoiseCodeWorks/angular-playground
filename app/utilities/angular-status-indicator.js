@@ -4,7 +4,5 @@ app.controller('AngularStatusInidicator', AngularStatusInidicator);
 
 
 function AngularStatusInidicator($scope){
-	this.angularStatus = 'Working'
-	
-	 	
+	this.angularStatus = 'Working';
 }

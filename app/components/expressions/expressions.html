@@ -1,0 +1,89 @@
+<small class="alert alert-success">ExpressionsController Status: {{controller.expressionsStatus}}</small>
+<div class="readme">
+	<h1>Expressions</h1>
+	<h3>Angular helps bridge the gap between your html, css, and js</h3>
+
+	<p>A cool feature of angular is the ability to use <a href="https://docs.angularjs.org/guide/expression" target="_blank">Expressions</a> in our html</p>
+
+	<p>Example: 2+2 = <span ng-non-bindable>{{ 2 + 2 }}</span></p>
+	
+	<p>Angular parses your html and looks specifically for the double curlies, handlebars, or mustache brackets. When angular comes across a set of these brackets it essentially says this</p>
+	<p ng-non-bindable> Pause HTML {{ Evaluate JavaScript code: }} Restart HTML  </p>
+	
+	<p>Remember in jquery you were mixing html snippets into your javascript you had something that looked like </p>
+	<h4>JQuery Approach</h4>
+	<pre>
+		<code prism class="language-javascript">
+var html = '&lt;div class="player-card"&gt;' +
+	'&lt;button class="btn btn-xs btn-danger remove" id="' + player.id + '"&gt;Remove&lt;/button&gt;' +
+	'&lt;div&gt;' +
+	'&lt;img src="http://s.nflcdn.com/static/content/public/image/fantasy/transparent/200x200/" /&gt;' +
+	'&lt;/div&gt;' +
+	'&lt;div&gt;' +
+	'&lt;span&gt;' + player.name + '&lt;/span&gt;' +
+	'&lt;/div&gt;' +
+	'&lt;div&gt;' +
+	'&lt;span&gt;' + player.position + '&lt;/span&gt;' +
+	'&lt;/div&gt;' +
+	'&lt;div&gt;' +
+	'&lt;span&gt;' + player.number + '&lt;/span&gt;' +
+	'&lt;/div&gt;' +
+	'&lt;/div&gt;';
+rosterDiv.append(html);
+		</code>
+	</pre>
+	
+	<p>Writing a full scale application with techniques like above quickly become cumbersome and difficult to read. Thanks to angular HTML Templating becomes a lot easier as you will see as you continue through. Look at the example below to see the angular approach</p>
+	<h4>Angular Approach</h4>
+	<pre>
+		<code prism class="language-html">
+&lt;div class="player-card"&gt;
+	&lt;button class="btn btn-xs btn-danger remove"&gt;Remove&lt;/button&gt;
+	&lt;div&gt;
+		&lt;img ng-src="player.photo" /&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.name}}&lt;/span&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.position}}&lt;/span&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.number}}&lt;/span&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+		</code>
+	</pre>
+
+<p>What is nice about this approach is you don't have to leave your markup while you are trying to figure out how you want something to look. Also you never have to write using string concatination and keep track of all the '""' + '""' </p>
+
+<p>You might not see the power of these expressions yet but thats okay, try the exercises below and then move on to the next section </p>
+
+</div>
+<hr>
+<!-- Once you have read up on Expressions go ahead and start editing the html below-->
+<div class="ng-exercises">
+	<h1>Exercises</h1>
+	<div class="challenges">
+		<ul class="list-group">
+			<li class="list-group-item">
+				<span class="challenge">Write a math equation that Angular can evaluate</span>
+				<div class="answer">
+					{{<!--Your Code Here-->}}
+				</div>
+			</li>
+			<li class="list-group-item">
+				<span class="challenge">Using string concatination get the customary Hello, World! to display on the screen. Don't forget your quotes</span>
+				<div class="answer">
+					{{<!--Your Code Here-->}}
+				</div>
+			</li>
+			<li class="list-group-item">
+				<span class="challenge">We have a controller driving this view. The controller is nothing more than an object with properties. One of the properties on the controller object is called test. Render the test property to the screen</span>
+				<div class="answer">
+					{{<!--Your Code Here-->}}
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,109 @@
+<small class="alert alert-success">StartController Status: {{controller.startStatus}}</small>
+<h1>Getting Started</h1>
+
+<p>As you continue throughout you will see terminology that you may or may not of encountered in the past.</p>
+<h4>Glossary of Terms</h4>
+<ul class="list-group">
+	<li class="list-group-item"><b>Angular</b> - A JavaScript Framework built by a team of googlers</li>
+	<li class="list-group-item"><b>ng</b> - An abbreviation of the work Angular, Also a common prefix for Directives</li>
+	<li class="list-group-item"><b>Directives</b> - A directive is usually a tag, html element, or element attribute that comes with predefined instructions</li>
+	<li class="list-group-item"><b>Controllers</b> - Controllers are the JavaScript section tied to components or views. They are the driving force behind the functionality of site</li>
+	<li class="list-group-item"><b>View</b> - The view is the html that gets rendered by the browser. The view often has a mix of ng expressions</li>
+	<li class="list-group-item"><b>Expressions</b> - ng expressions are defined with a double pair of curley braces <span ng-non-bindable>{{}}</span> where anything inside the curley braces will be evaluated as javascript</li>
+	<li class="list-group-item"><b>Bindings</b> - A binding is a connection between a property or function in javascript and your view</li>
+	<li class="list-group-item"><b>Services</b> - Services are reserved for code that is shared amongst controllers and views. They are also the primary outlet for communicating with other applications usually through a restfull API</li>
+</ul>
+<h1>Some of the Basics</h1>
+<p>
+	Setting up an angular app isn't necessarily difficult but it is a bit involved. For that reason the Playground is entierly setup for you. Learning how to use Angular is much more important then knowing the ins and outs of spinning up an app from scratch. But here are a few key points.
+</p>
+
+<ul class="list-group">
+	<li class="list-group-item">
+		<h4>app.js</h4>
+		<pre>
+			<code prism class="language-javascript">
+//Initializing the Angular App and giving it a name
+var app = angular.module('The-Name-Of-Your-Application', []);
+
+/* DON'T WORRY ABOUT THIS RIGHT NOW
+* The second argument is an array where at some point
+* you can specify other angular modules that your app
+* is dependent upon.
+*/
+			</code>
+		</pre>
+	</li>
+</ul>
+
+<p>Once you have the app initialized lets tie it to the HTML this is a two part step</p>
+
+<ul class="list-group">
+	<li class="list-group-item">
+		<h4>index.html</h4>
+		<pre>
+			<code prism class="language-html">
+&lt;!--using the ng-app directive we tie our angular app to our html--&gt;
+&lt;html ng-app="The-Name-Of-Your-Application"&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+	&lt;!--Your HTML...--&gt;
+
+	&lt;!--Notice you must load angular before loading app.js--&gt;
+	&lt;script src="path-to-angular.js"&gt;&lt;/script&gt;
+	&lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+			</code>
+		</pre>
+	</li>
+</ul>
+
+<p>Now that your app and your html are tied together they know how to refrence one another. This has essentially created a two way street between your view and the JavaScript code that is going to drive it or make the page more dynamic</p>
+
+<p>To add some extra functionality and organization to our page we can setup individual components or mini-views within our page.</p>
+
+<p>To keep it simple for now think of needing to register angular components or controllers to your main application to do this in javascript we specify the following</p>
+
+<ul class="list-group">
+	<li class="list-group-item">
+		<h4>controller-name.js</h4>
+		<pre><code class="language-javascript" prism>
+//remember app was already setup in app.js and is referencing the app that was registered or tied to your view with the ng-app directive
+app.controller('The-Name-Of-A-Controller', functionToExecute);
+
+function functionToExecute(){
+  //your code here
+}
+
+</code></pre>
+	</li>
+	<li class="list-group-item">
+		<h4>controller-name.js</h4>
+		<pre><code class="language-javascript" prism>
+//By convention with Angular Controllers are CamelCased and are essentially Constructor functions
+app.controller('MainController', MainController);
+
+//Also by convention controllers usually end with the word Controller  
+function MainController(){
+  //We are now in a constructor function so anything we put on this will be accessible to us in our view
+  
+  this.name = "The Angular PlayGround";
+  
+}
+
+</code></pre>
+	</li>
+	<li class="list-group-item">
+		<h4>index.html</h4>
+		<pre><code class="language-html" prism>
+&lt;!--There are a few ways of adding a controller into your view for now we will use another directie called ng-controller --&gt;
+&lt;div ng-controller="MainController as controller"&gt;
+	&lt;!--Anything in the scope of this div now has direct access to our MainController object wich we can easily access by using the alias setup with the as keyword in the ng-controller directive --&gt;
+	{{controller.name}}
+&lt;/div&gt;
+</code></pre>
+	</li>
+</ul>
