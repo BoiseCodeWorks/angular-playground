@@ -1,1 +1,90 @@
 <small class="alert alert-success">RepeatController Status: {{controller.repeatStatus}}</small>
+<div class="readme">
+  <h1>Help Fix this Cart</h1>
+  <p>What we have here is a broken website. There are a few challenges we need to solve to get it working</p>
+  <p>using the comments in the html and in the controller file as guides you should be able to get this cart back in top notch condition.</p>
+  
+  <p>First things first lets start with the HTML.</p>
+  
+</div>
+<hr>
+<div class="ng-exercises">
+  <h1>{{controller.name}}</h1>
+  <p>Items added to your Cart ({{controller.getCount() || 0}})</p>
+  <hr />
+  <p class="alert alert-warning" ng-show="controller.cart.length < 1">
+    You have no items in your cart... Buy something!
+  </p>
+  <table class="table" ng-if="controller.cart.length > 0">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Color</th>
+        <th>Size</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in controller.cart">
+        <td>{{item.name}}</td>
+        <td>{{item.color}}</td>
+        <td>{{item.size}}</td>
+        <td>
+          <select ng-model="item.quantity" ng-options="o as o for o in [1,2,3,4,5,6,7,8,9,10]"></select>
+        </td>
+        <!--HElP out the view to make the price of this item display as currency by using a filter-->
+        <td>{{item.price * item.quantity}}</td>
+        <td>
+          <button class="btn btn-xs btn-warning" ng-click=controller.removeItemFromCart(item)>X</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="text-right">Total:</td>
+        <!--HElP out the view to make the price display as currency by using a filter-->
+        <td>{{controller.calculateCartTotal()}}</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+  <hr />
+  <div class="container">
+    <div class="row">
+      <!--
+        - If you were to look at the controller you would notice
+        - we have a propety called store which is an object. 
+        - The store object has a property called items.
+        - Using the Angular ng-repeat directive you will be able to
+        - Render each item in the store on the page 
+        - Remember that ng-repeat sytax is similar to a (for in loop)
+        - Where the first word represents an entire object similarly to the .forEach(function(item))
+        - ** hint: be sure to use item as the first word
+        -->
+      <div ng-repeat="" class="col-sm-4">
+        <div class="shopping-item">
+          <!--HElP out the view to make the price of the item display as currency by using a filter-->
+          <p class="item-price">{{item.price}}</p>
+          <p class="item-name">
+            {{item.name}}</p>
+          <img ng-src="{{item.img}}">
+          <p>
+            <select ng-model="item.selectedColor" ng-options="color.name as color.name for color in item.colors">
+              <option value=''>--Color--</option>
+            </select>
+            <select ng-model="item.selectedSize">
+              <option value=''>--Size--</option>
+              <option ng-repeat="size in item.sizes">{{size}}</option>
+            </select>
+          </p>
+          <button class="btn btn-xs btn-primary" ng-disabled="!item.selectedColor || !item.selectedSize" ng-click="controller.addItemToCart(item)">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
