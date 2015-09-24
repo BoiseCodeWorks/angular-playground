@@ -34,7 +34,7 @@ function ControllersController(){
 			</span>
 					<div class="answer">
 						<ul class="list-group">
-							<li ng-repeat="friend in controller.friends">{{friend}}</li>
+							<li ng-repeat="friend in controller.friends track by $index">{{friend}}</li>
 						</ul>
 					</div>
 				</li>
