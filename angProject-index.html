@@ -17,13 +17,13 @@
             </div>
             <div class="panel-body">
                 <p>
-                    Joe has {{ vm.joe.cash }}
+                    Joe has {{ vm.joe.cash | currency }}
                 </p>
                 <p>
-                    Bob has {{ vm.bob.cash }}
+                    Bob has {{ vm.bob.cash | currency }}
                 </p>
                 <p>
-                    The bank has {{ vm.bank }}
+                    The bank has {{ vm.bank | currency }}
                 </p>
             </div>
             <div class="panel-footer">
