@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html ng-app="racingFrogs">
+<head>
+    <meta charset="UTF-8">
+    <title>Racing Frogs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="angProject-app.css">
+</head>
+
+<body ng-controller="MainController as vm">
+    <br />
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Fun with Joe and Bob<br />
+                Angular Working? : {{vm.working}}
+            </div>
+            <div class="panel-body">
+                <p>
+                    Joe has {{ vm.joe.cash }}
+                </p>
+                <p>
+                    Bob has {{ vm.bob.cash }}
+                </p>
+                <p>
+                    The bank has {{ vm.bank }}
+                </p>
+            </div>
+            <div class="panel-footer">
+                <span class="btn button-custom" ng-click="vm.giveMoneyToJoe()">Give $10 to Joe</span>
+                <span class="btn button-custom" ng-click="vm.receiveMoneyFromBob()">Receive $5 from Bob</span>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.6/angular.min.js"></script>
+    <script src="angProject-app.js"></script>
+</body>
+</html>

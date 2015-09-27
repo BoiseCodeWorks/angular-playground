@@ -32,12 +32,18 @@ function ControllersController(){
 				create a property in the constructor called friends which will be an array of strings 
 				['Joey', 'Chandler', 'Monica', 'Phebes', 'Ross & Rachel'];
 			</span>
-					<div class="answer">
-						<ul class="list-group">
-							<li ng-repeat="friend in controller.friends track by $index">{{friend}}</li>
-						</ul>
-					</div>
-				</li>
+                    <div class="box1-custom"><br />
+                        <ul>
+                            <h4><u>Friends</u></h4>
+                            <div class="answer">
+                                <ul>
+                                    <ul type="square" class="list-group">
+                                        <li ng-repeat="friend in controller.friends track by $index">{{friend}}</li>
+                                    </ul>
+                                </ul>
+                            </div>
+                        </ul><br />
+                    </div>				</li>
 				<li class="list-group-item">
 					<span class="challenge">Write a function called addFriend that will take the input from ng-model="controller.newFriend" If done correctly you should see your new friend pop up on the list above once you click submit</span>
 					<div class="answer">
@@ -51,3 +57,4 @@ function ControllersController(){
 			</ul>
 		</div>
 	</div>
+</div>
