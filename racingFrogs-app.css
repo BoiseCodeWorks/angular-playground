@@ -1,0 +1,14 @@
+﻿body {
+    background-color: lightblue;
+}
+.button-custom {
+    background-color:lightgreen;
+}
+.float-left {
+    display:inline-block;
+    float:left;
+}
+.float-right {
+    display:inline-block;
+    float:right;
+}

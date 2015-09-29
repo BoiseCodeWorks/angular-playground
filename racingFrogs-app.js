@@ -5,6 +5,24 @@ app.controller('MainController', MainController);
 function MainController() {
     var vm = this; //instead of using this when refering to the controller, let's use vm. It will make things easier.
     vm.working = "Yes";
+
+    // Frog Races ----------------------------------------------------------------------------
+    vm.frogs = [
+        { lane: 1, name: "Frank", position: 0 },
+        { lane: 2, name: "Harry", position: 0 },
+        { lane: 3, name: "Ed", position: 0 },
+        { lane: 4, name: "Hank", position: 0 },
+        { lane: 5, name: "Duane", position: 0 }
+    ];
+
+    vm.getCount = function () {
+        return vm.frogs.length;
+    };
+    //for (var i = 0; i < vm.frogs.length; i++) {
+    //    console.log(vm.frogs[i].name + " in lane " + vm.frogs[i].lane);
+    //}
+
+    // Fun with Joe and Bob panel ------------------------------------------------------------ 
     vm.joe = new Guy("Joe", 100);
     vm.bob = new Guy("Bob", 150);
     vm.bank = 200;
