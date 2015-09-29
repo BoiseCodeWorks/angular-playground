@@ -14,7 +14,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <span class="float-left">Welcome to The Frog Races</span>
-                <span class="float-right">You have {{vm.getCount() | number:0}} frogs ready to WIN!</span><br />
+                <span class="float-right">You have {{vm.getCount() | number:0}} frogs ready to RACE!</span><br />
             </div>
             <div class="panel-body">
                 <table class="race-track" style="width: 100%">
@@ -22,7 +22,7 @@
                         <tr>
                             <td style="width: 15px"> </td>
                             <td style="width: 55px">| Frog</td>
-                            <td>
+                            <td id="raceTrack">
                                 <span class="float-left">| START</span>
                                 <span class="float-right">FINISH |</span>
                             </td>
@@ -31,14 +31,22 @@
                     <tbody>
                         <tr ng-repeat="frog in vm.frogs">
                             <td><span>{{frog.lane | number:0}} </span></td>
-                            <td style="border: 1px solid blue; position: relative"><center>{{frog.name}}</center></td>
-                            <td style="border: 1px dashed blue; position: relative"> <br /></td>
+                            <td style="border: 1px solid blue; position: relative"><center>{{frog.name}}<!--<br />{{frog.position}}--></center></td>
+                            <td style="border: 1px dashed blue; position: relative">
+                                <div id="frog{{frog.lane}}" style="position: relative">
+                                    <img src="{{frog.picUrl}}" />
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="panel-footer">
+                <!--<span>Track is {{vm.getTrackWidth() | number:0}} pixels wide.</span><br />-->
                 <span class="btn button-custom" ng-click="vm.startRace()">Start Race</span>
+                <span class="btn button-custom" ng-click="vm.move()">Move</span>
+                <span class="btn button-custom" onclick="history.go(0)">Reset</span>
+                <span class="float-right winner-found">{{vm.winner}}</span>
             </div>
         </div>
 

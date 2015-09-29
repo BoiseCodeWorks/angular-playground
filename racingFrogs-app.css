@@ -12,3 +12,15 @@
     display:inline-block;
     float:right;
 }
+.winner-found {
+    font-size:large;
+    color:red;
+}
+.winner-off {
+    display:inline-block;
+    visibility:hidden;
+}
+.winner-on {
+    display:inline-block;
+    visibility:visible;
+}
