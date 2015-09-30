@@ -16,11 +16,6 @@
     font-size:large;
     color:red;
 }
-.winner-off {
-    display:inline-block;
-    visibility:hidden;
-}
-.winner-on {
-    display:inline-block;
-    visibility:visible;
+.under-button {
+    font-size:small;
 }

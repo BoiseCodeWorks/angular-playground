@@ -6,19 +6,46 @@ function MainController($timeout) {
     var vm = this; //instead of using this when referring to the controller, let's use vm. It will make things easier.
     vm.working = "Yes";
 
-    // Frog Races ----------------------------------------------------------------------------
-    vm.winner = "";
-    vm.frogs = [
-        { lane: 1, name: "Frank", position: 0, picUrl: "img/BullFrog.gif" },
-        { lane: 2, name: "Harry", position: 0, picUrl: "img/BullFrog.gif" },
-        { lane: 3, name: "Eddie", position: 0, picUrl: "img/BullFrog.gif" },
-        { lane: 4, name: "Duane", position: 0, picUrl: "img/BullFrog.gif" },
-        { lane: 5, name: "Hank", position: 0, picUrl: "img/BullFrog.gif" }
+    vm.frogSet = [
+        { lane: 1, name: "Frank", position: 0, picUrl: "img/BullFrog.gif", color: "red" },
+        { lane: 2, name: "Harry", position: 0, picUrl: "img/BullFrog.gif", color: "green" },
+        { lane: 3, name: "Eddie", position: 0, picUrl: "img/BullFrog.gif", color: "maroon" },
+        { lane: 4, name: "Duane", position: 0, picUrl: "img/BullFrog.gif", color: "blue" },
+        { lane: 5, name: "Hank", position: 0, picUrl: "img/BullFrog.gif", color: "orange" },
+        { lane: 6, name: "Drake", position: 0, picUrl: "img/BullFrog.gif", color: "indigo" },
+        { lane: 7, name: "Gerik", position: 0, picUrl: "img/BullFrog.gif", color: "brown" },
+        { lane: 8, name: "Monte", position: 0, picUrl: "img/BullFrog.gif", color: "purple" },
+        { lane: 9, name: "Abel", position: 0, picUrl: "img/BullFrog.gif", color: "orangered" }
     ];
 
-    vm.getCount = function () {
-        return vm.frogs.length;
-    };
+    vm.frogs = [];
+    for (var i = 0; i < 6; i++) {
+        vm.frogs.push(vm.frogSet[i]);
+    }
+
+    vm.winner = "You have " + vm.frogs.length + "  frogs ready to RACE ! ";
+
+    vm.addFrog = function () {
+        var a = vm.frogs.length + 1;
+        if (a > 9) { a = 9 };
+        vm.frogs = [];
+        for (var i = 0; i < a; i++) {
+            vm.frogs.push(vm.frogSet[i]);
+            console.log("adding frogs " + i);
+        }
+        vm.newRace();
+    }
+
+    vm.removeFrog = function () {
+        var a = vm.frogs.length - 1;
+        if (a < 2) { a = 2 };
+        vm.frogs = [];
+        for (var i = 0; i < a; i++) {
+            vm.frogs.push(vm.frogSet[i]);
+            console.log("removing frogs " + i);
+        }
+        vm.newRace();
+    }
 
     vm.getTrackWidth = function () {
         var raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
@@ -26,31 +53,20 @@ function MainController($timeout) {
         return raceTrackWidth;
     };
 
-    var winning = 0;
-    var raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
-    var itsDone = false;
-
-    vm.move = function () {
-        if (!itsDone) {
-            for (var i = 0; i < vm.frogs.length; i++) {
-                var posX = vm.frogs[i].position + Math.floor(Math.random() * 45);
-                vm.frogs[i].position = posX;
-                document.getElementById('frog' + (i + 1)).style.left = posX + "px";
-                if (winning < posX) { winning = posX; };
-                if (winning >= raceTrackWidth) {
-                    vm.winner = " Winner is " + vm.frogs[i].name + " in lane " + vm.frogs[i].lane + "   ";
-                    itsDone = true;
-                    break;
-                }
-            }
+    vm.newRace = function () {
+        vm.winner = "";
+        for (var i = 0; i < vm.frogs.length; i++) {
+            vm.frogs[i].position = 0;
+            document.getElementById('frog' + (i + 1)).style.left = vm.frogs[i].position + "px";
+            vm.winner = "You have " + vm.frogs.length + "  frogs ready to RACE ! ";
         }
     }
 
     vm.startRace = function () {
-        console.log("startRace function fired");
-        winning = 0;
-        raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
-        itsDone = false;
+        vm.winner = "And they're off ! ";
+        var winning = 0;
+        var raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
+        var itsDone = false;
         if (!itsDone) {
             for (var i = 0; i < vm.frogs.length; i++) {
                 var posX = vm.frogs[i].position + Math.floor(Math.random() * 20);
@@ -58,7 +74,7 @@ function MainController($timeout) {
                 document.getElementById('frog' + (i + 1)).style.left = posX + "px";
                 if (winning < posX) { winning = posX; };
                 if (winning >= raceTrackWidth) {
-                    vm.winner = " Winner is " + vm.frogs[i].name + " in lane " + vm.frogs[i].lane + "   ";
+                    vm.winner = " Winner: " + vm.frogs[i].name + " wearing " + vm.frogs[i].color + " in lane " + vm.frogs[i].lane + "   ";
                     itsDone = true;
                     break;
                 }
