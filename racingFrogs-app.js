@@ -2,7 +2,7 @@
 app.controller('MainController', MainController);
 //No need to change anything above this line.
 
-function MainController() {
+function MainController($timeout) {
     var vm = this; //instead of using this when referring to the controller, let's use vm. It will make things easier.
     vm.working = "Yes";
 
@@ -28,43 +28,45 @@ function MainController() {
 
     var winning = 0;
     var raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
-
-    vm.startRace = function () {
-        console.log("startRace function not working");
-        //var startTime = Date.now();
-        //var endTimeLimit = startTime + 100000;
-        //for (var w = startTime; w < endTimeLimit; w++) {
-        //    vm.move();
-        //    if (winning >= raceTrackWidth) {
-        //        break;
-        //    }
-        //    for (var t = 1; t <= 3; t++) {
-        //        setTimeout(function (x) { return function () { console.log(x); }; }(t), 1000 * t);
-        //    }
-        //}
-    }
+    var itsDone = false;
 
     vm.move = function () {
-        if (winning < raceTrackWidth) {
+        if (!itsDone) {
             for (var i = 0; i < vm.frogs.length; i++) {
-                var w = i + 1;
-                var posX = vm.frogs[i].position + Math.floor(Math.random() * 35);
+                var posX = vm.frogs[i].position + Math.floor(Math.random() * 45);
                 vm.frogs[i].position = posX;
-                document.getElementById('frog' + w).style.left = posX + "px";
-                if (winning < posX) {
-                    winning = posX;
-                }
+                document.getElementById('frog' + (i + 1)).style.left = posX + "px";
+                if (winning < posX) { winning = posX; };
                 if (winning >= raceTrackWidth) {
                     vm.winner = " Winner is " + vm.frogs[i].name + " in lane " + vm.frogs[i].lane + "   ";
+                    itsDone = true;
                     break;
                 }
             }
-            raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
         }
-        // TESTING A TIMER
-        //for (var t = 1; t <= 3; t++) {
-        //    setTimeout(function (x) { return function () { console.log(x); }; }(t), 1000 * t);
-        //}
+    }
+
+    vm.startRace = function () {
+        console.log("startRace function fired");
+        winning = 0;
+        raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
+        itsDone = false;
+        if (!itsDone) {
+            for (var i = 0; i < vm.frogs.length; i++) {
+                var posX = vm.frogs[i].position + Math.floor(Math.random() * 20);
+                vm.frogs[i].position = posX;
+                document.getElementById('frog' + (i + 1)).style.left = posX + "px";
+                if (winning < posX) { winning = posX; };
+                if (winning >= raceTrackWidth) {
+                    vm.winner = " Winner is " + vm.frogs[i].name + " in lane " + vm.frogs[i].lane + "   ";
+                    itsDone = true;
+                    break;
+                }
+            }
+        }
+        if (!itsDone) {
+            $timeout(vm.startRace, 70);
+        }
     }
 
     // Fun with Joe and Bob panel ------------------------------------------------------------ 
