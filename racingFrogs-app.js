@@ -85,6 +85,7 @@ function MainController($timeout) {
         }
     }
 
+
     // Fun with Joe and Bob panel ------------------------------------------------------------ 
     vm.joe = new Guy("Joe", 100);
     vm.bob = new Guy("Bob", 150);
@@ -126,3 +127,61 @@ function MainController($timeout) {
     }
 
 }
+
+// Betting Service is separate from Main Controller ================================= 
+app.service('BettingService', BettingService);
+function BettingService() {
+    
+    function BettingService() {
+        var _races = {};
+        var _raceId = 0;
+        this.registerRace = function () {
+
+        }
+        this.getRace = function (reaceId) {
+
+        }
+        var Race = function () {
+            this.id = _raceId;
+            this.tickets = 1300;
+            this.contestants = [];
+            this.open = true;
+            this.bets = {};
+            _races[this.id] = this;
+            _raceId++;
+        }
+    }
+
+}  // end of Betting Service =====================================================
+
+//var roster = {
+//    players: {},
+//    addPlayer: function (player) {
+//        if (player.name) {
+//            this.players[player.id] = player;
+//            reloadPlayerCards();
+//        } else {
+//            alert("Unable to Add Player... likely missing a field or invalid data format.");
+//        }
+//    }
+//}
+
+//var fullNFL = {
+//    players2: {},
+//    addPlayer2: function (player2) {
+//        this.players2[player2.id] = player2;
+//    }
+//}
+
+//// roster factory
+//var Player = function (name, position, number, photo, team, status, byeweek, age, id) {
+//    this.name = name;
+//    this.position = position;
+//    this.number = number;
+//    this.photo = photo;
+//    this.team = team;
+//    this.status = status;
+//    this.byeweek = byeweek;
+//    this.age = age;
+//    this.id = id;
+//}
