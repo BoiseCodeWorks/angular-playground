@@ -7,15 +7,15 @@ function MainController(BettingService, $timeout) {
     vm.working = "Yes";
 
     vm.frogSet = [
-        { lane: 1, name: "Frank", position: 0, picUrl: "img/BullFrog.gif", color: "red" },
-        { lane: 2, name: "Harry", position: 0, picUrl: "img/BullFrog.gif", color: "green" },
-        { lane: 3, name: "Eddie", position: 0, picUrl: "img/BullFrog.gif", color: "maroon" },
-        { lane: 4, name: "Duane", position: 0, picUrl: "img/BullFrog.gif", color: "blue" },
-        { lane: 5, name: "Hank", position: 0, picUrl: "img/BullFrog.gif", color: "orange" },
-        { lane: 6, name: "Drake", position: 0, picUrl: "img/BullFrog.gif", color: "indigo" },
-        { lane: 7, name: "Gerik", position: 0, picUrl: "img/BullFrog.gif", color: "brown" },
-        { lane: 8, name: "Monte", position: 0, picUrl: "img/BullFrog.gif", color: "purple" },
-        { lane: 9, name: "Abel", position: 0, picUrl: "img/BullFrog.gif", color: "orangered" }
+        { lane: 1, name: "Frank", posX: 0, picUrl: "img/BullFrog.gif", color: "red" },
+        { lane: 2, name: "Harry", posX: 0, picUrl: "img/BullFrog.gif", color: "green" },
+        { lane: 3, name: "Eddie", posX: 0, picUrl: "img/BullFrog.gif", color: "maroon" },
+        { lane: 4, name: "Duane", posX: 0, picUrl: "img/BullFrog.gif", color: "blue" },
+        { lane: 5, name: "Hank", posX: 0, picUrl: "img/BullFrog.gif", color: "orange" },
+        { lane: 6, name: "Drake", posX: 0, picUrl: "img/BullFrog.gif", color: "indigo" },
+        { lane: 7, name: "Gerik", posX: 0, picUrl: "img/BullFrog.gif", color: "brown" },
+        { lane: 8, name: "Monte", posX: 0, picUrl: "img/BullFrog.gif", color: "purple" },
+        { lane: 9, name: "Abel", posX: 0, picUrl: "img/BullFrog.gif", color: "orangered" }
     ];
 
     // initial load of 6 frogs and no winner yet
@@ -31,10 +31,10 @@ function MainController(BettingService, $timeout) {
     }
     vm.races = BettingService.getAllRace();
 
-    vm.setFrogPosition = function () {
+    vm.setFrogposX = function () {
         for (var i = 0; i < vm.frogs.length; i++) {
-            vm.frogs[i].position = 0;
-            document.getElementById('frog' + (i + 1)).style.left = vm.frogs[i].position + "px";
+            vm.frogs[i].posX = 0;
+            document.getElementById('frog' + (i + 1)).style.left = vm.frogs[i].posX + "px";
             vm.winner = "You have " + vm.frogs.length + "  frogs ready to RACE ! ";
         }
     }
@@ -46,7 +46,7 @@ function MainController(BettingService, $timeout) {
         for (var i = 0; i < a; i++) {
             vm.frogs.push(vm.frogSet[i]);
         }
-        vm.setFrogPosition();
+        vm.setFrogposX();
     }
 
     vm.removeFrog = function () {
@@ -56,7 +56,7 @@ function MainController(BettingService, $timeout) {
         for (var i = 0; i < a; i++) {
             vm.frogs.push(vm.frogSet[i]);
         }
-        vm.setFrogPosition();
+        vm.setFrogposX();
     }
 
     vm.getTrackWidth = function () {
@@ -68,7 +68,7 @@ function MainController(BettingService, $timeout) {
     vm.practiceHeat = function () {
         if (!raceReady) {
             vm.winner = "";
-            vm.setFrogPosition();
+            vm.setFrogposX();
             raceReady = true;
             vm.startRace();
         }
@@ -79,8 +79,8 @@ function MainController(BettingService, $timeout) {
         vm.races = BettingService.getAllRace();
         raceReady = true;
         for (var i = 0; i < vm.frogs.length; i++) {
-            vm.frogs[i].position = 0;
-            document.getElementById('frog' + (i + 1)).style.left = vm.frogs[i].position + "px";
+            vm.frogs[i].posX = 0;
+            document.getElementById('frog' + (i + 1)).style.left = vm.frogs[i].posX + "px";
             vm.winner = "You have " + vm.frogs.length + "  frogs ready to RACE ! ";
         }
     }
@@ -93,8 +93,8 @@ function MainController(BettingService, $timeout) {
             var raceTrackWidth = document.getElementById('raceTrack').offsetWidth - 50;
             if (!itsDone) {
                 for (var i = 0; i < vm.frogs.length; i++) {
-                    var posX = vm.frogs[i].position + Math.floor(Math.random() * 20);
-                    vm.frogs[i].position = posX;
+                    var posX = vm.frogs[i].posX + Math.floor(Math.random() * 20);
+                    vm.frogs[i].posX = posX;
                     document.getElementById('frog' + (i + 1)).style.left = posX + "px";
                     if (winning < posX) { winning = posX; };
                     if (winning >= raceTrackWidth) {
@@ -180,6 +180,7 @@ function BettingService() {
         }
         //Number raceId, String bettingOn, Boolean outcome, Number wager 
         this.placeBet = function (raceId, bettingOn, wager) {
+            console.log("BettingService.placeBet has been called")
             /*this function is the one that gets called from your controller.
               build the appropriate bet object fro the arguments and add it to the race.
               consider ensuring that the raceId is an actual race object 

@@ -63,11 +63,18 @@
                     <h4><span class="float-left">Betting on the Races (under development)</span></h4><br />
                 </div>
                 <div class="panel-body">
-
-                    <div class="float-left">
-                        <span class="btn button-custom" ng-click="vm.newRace()">New Race</span>
+                    <div id="bet-box">
+                        <div class="float-left">
+                            <!--<span class="btn button-custom" ng-click="vm.newRace()">New Race</span>-->
+                            <p><u><b>Placing Your Bets</b></u><br />Race must be open</p>
+                            <p>Race: <input type="number" id="currentRace" value="1" min="1" max="9" style="width:30px" /></p>
+                            <p>Frog: <input type="text" id="currentFrog" style="width:70px" /></p>
+                            <p>Wager: <input type="number" id="wagerAmount" value="25" min="10" max="999" style="width:58px" /></p>
+                            <center>
+                                <p class="btn button-custom" ng-click="vm.BettingService.placeBet(currentRace, currentFrog, wagerAmount)">Place Bet</p>
+                            </center>
+                        </div>
                     </div>
-
                     <div id="betHistory" class="float-right">
                         <table class="bet-history" style="width:100%">
                             <thead>
@@ -77,7 +84,7 @@
                                     <td style="width: 60px"><u><b>Tickets</b></u></td>
                                     <td style="width: 40px"><u><b>Bets</b></u></td>
                                     <td style="width: 60px"><u><b>Winner</b></u></td>
-                                    <td style="width: 200px"><u><b>Contestants</b></u></td>
+                                    <td style="width: 250px"><u><b>Contestants</b></u></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,7 +102,7 @@
 
                 </div>
                 <div class="panel-footer">
-                    <span class="btn button-custom" ng-click="vm.startRace()">Start Race</span>
+                    <span class="btn button-custom" ng-click="vm.startRace()">Run Next Race</span>
                     <!--<span class="float-right winner-found">{{vm.winner}}</span>-->
                 </div>
             </div>
