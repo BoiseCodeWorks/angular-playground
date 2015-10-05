@@ -3,6 +3,12 @@
 }
 .button-custom {
     background-color:lightgreen;
+    display:inline-block;
+}
+.button-custom-top {
+    background-color:lightgreen;
+    display:inline-block;
+    color:darkblue;
 }
 .float-left {
     display:inline-block;
@@ -18,4 +24,8 @@
 }
 .under-button {
     font-size:small;
+}
+.bet-history {
+    display:inline-block;
+    float:right;
 }

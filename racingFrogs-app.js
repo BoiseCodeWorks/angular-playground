@@ -2,7 +2,7 @@
 app.controller('MainController', MainController);
 //No need to change anything above this line.
 
-function MainController($timeout) {
+function MainController(BettingService, $timeout) {
     var vm = this; //instead of using this when referring to the controller, let's use vm. It will make things easier.
     vm.working = "Yes";
 
@@ -18,12 +18,26 @@ function MainController($timeout) {
         { lane: 9, name: "Abel", position: 0, picUrl: "img/BullFrog.gif", color: "orangered" }
     ];
 
+    // initial load of 6 frogs and no winner yet
     vm.frogs = [];
     for (var i = 0; i < 6; i++) {
         vm.frogs.push(vm.frogSet[i]);
     }
-
     vm.winner = "You have " + vm.frogs.length + "  frogs ready to RACE ! ";
+    var raceReady = false;
+
+    for (var i = 0; i < 9; i++) {
+        vm.raceId = BettingService.registerRace();
+    }
+    vm.races = BettingService.getAllRace();
+
+    vm.setFrogPosition = function () {
+        for (var i = 0; i < vm.frogs.length; i++) {
+            vm.frogs[i].position = 0;
+            document.getElementById('frog' + (i + 1)).style.left = vm.frogs[i].position + "px";
+            vm.winner = "You have " + vm.frogs.length + "  frogs ready to RACE ! ";
+        }
+    }
 
     vm.addFrog = function () {
         var a = vm.frogs.length + 1;
@@ -31,9 +45,8 @@ function MainController($timeout) {
         vm.frogs = [];
         for (var i = 0; i < a; i++) {
             vm.frogs.push(vm.frogSet[i]);
-            console.log("adding frogs " + i);
         }
-        vm.newRace();
+        vm.setFrogPosition();
     }
 
     vm.removeFrog = function () {
@@ -42,19 +55,29 @@ function MainController($timeout) {
         vm.frogs = [];
         for (var i = 0; i < a; i++) {
             vm.frogs.push(vm.frogSet[i]);
-            console.log("removing frogs " + i);
         }
-        vm.newRace();
+        vm.setFrogPosition();
     }
 
     vm.getTrackWidth = function () {
-        var raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
-        //console.log("Track width is : " + raceTrackWidth);
+        var raceTrackWidth = document.getElementById('raceTrack').offsetWidth - 50 ;
+        //console.log("Track width is : " + raceTrackWidth);  in px
         return raceTrackWidth;
     };
 
+    vm.practiceHeat = function () {
+        if (!raceReady) {
+            vm.winner = "";
+            vm.setFrogPosition();
+            raceReady = true;
+            vm.startRace();
+        }
+    }
+
     vm.newRace = function () {
         vm.winner = "";
+        vm.races = BettingService.getAllRace();
+        raceReady = true;
         for (var i = 0; i < vm.frogs.length; i++) {
             vm.frogs[i].position = 0;
             document.getElementById('frog' + (i + 1)).style.left = vm.frogs[i].position + "px";
@@ -63,25 +86,29 @@ function MainController($timeout) {
     }
 
     vm.startRace = function () {
-        vm.winner = "And they're off ! ";
-        var winning = 0;
-        var raceTrackWidth = document.getElementById('raceTrack').offsetWidth;
-        var itsDone = false;
-        if (!itsDone) {
-            for (var i = 0; i < vm.frogs.length; i++) {
-                var posX = vm.frogs[i].position + Math.floor(Math.random() * 20);
-                vm.frogs[i].position = posX;
-                document.getElementById('frog' + (i + 1)).style.left = posX + "px";
-                if (winning < posX) { winning = posX; };
-                if (winning >= raceTrackWidth) {
-                    vm.winner = " Winner: " + vm.frogs[i].name + " wearing " + vm.frogs[i].color + " in lane " + vm.frogs[i].lane + "   ";
-                    itsDone = true;
-                    break;
+        if (raceReady) {
+            vm.winner = "And they're off ! ";
+            var itsDone = false;
+            var winning = 0;
+            var raceTrackWidth = document.getElementById('raceTrack').offsetWidth - 50;
+            if (!itsDone) {
+                for (var i = 0; i < vm.frogs.length; i++) {
+                    var posX = vm.frogs[i].position + Math.floor(Math.random() * 20);
+                    vm.frogs[i].position = posX;
+                    document.getElementById('frog' + (i + 1)).style.left = posX + "px";
+                    if (winning < posX) { winning = posX; };
+                    if (winning >= raceTrackWidth) {
+                        vm.winner = " Winner: " + vm.frogs[i].name + " wearing " + vm.frogs[i].color + " in lane " + vm.frogs[i].lane + "   ";
+                        itsDone = true;
+                        break;
+                    }
                 }
             }
-        }
-        if (!itsDone) {
-            $timeout(vm.startRace, 70);
+            if (!itsDone) {
+                $timeout(vm.startRace, 70);
+            } else {
+                raceReady = false;
+            }
         }
     }
 
@@ -130,16 +157,53 @@ function MainController($timeout) {
 
 // Betting Service is separate from Main Controller ================================= 
 app.service('BettingService', BettingService);
+
 function BettingService() {
-    
-    function BettingService() {
         var _races = {};
         var _raceId = 0;
         this.registerRace = function () {
-
+            var race = new Race();
+            return race.id;
         }
-        this.getRace = function (reaceId) {
-
+        this.getAllRace = function () {
+            return _races;
+        }
+        this.getRace = function (raceId) {
+            return _races[raceId];
+        }
+        this.addContestant = function (raceId, contestant) {
+            //Adds a frog to the race object remember to get the race first
+            //Also dont let frogs be added after the race has started.
+        }
+        this.getContestants = function (raceId) {
+            //just returns the contestants for a specified race
+        }
+        //Number raceId, String bettingOn, Boolean outcome, Number wager 
+        this.placeBet = function (raceId, bettingOn, wager) {
+            /*this function is the one that gets called from your controller.
+              build the appropriate bet object fro the arguments and add it to the race.
+              consider ensuring that the raceId is an actual race object 
+              validate the bettingOn contestant
+              pool the wages from the race
+            */
+        }
+        this.closeRace = function (raceId) {
+            //No more bets please the race has started
+        }
+        this.setWinners = function (raceId, winners) {
+            //make sure winners can only be set once
+        }
+        function isValidBet(race, bet) {
+            var valid;
+            for (var i = 0; i < race.contestants.length; i++) {
+                //make sure the frog selected is actually in the race system Prevents Cheating        
+            }
+            return valid;
+        }
+        function generateTicket(race, bet) {
+            //responsible for adding a bet to the specified race by its ticketNumber
+            //Don't forget to increase the ticketing count system
+            race.tickets++;
         }
         var Race = function () {
             this.id = _raceId;
@@ -147,41 +211,10 @@ function BettingService() {
             this.contestants = [];
             this.open = true;
             this.bets = {};
+            this.winner = {};
             _races[this.id] = this;
             _raceId++;
         }
+
     }
-
-}  // end of Betting Service =====================================================
-
-//var roster = {
-//    players: {},
-//    addPlayer: function (player) {
-//        if (player.name) {
-//            this.players[player.id] = player;
-//            reloadPlayerCards();
-//        } else {
-//            alert("Unable to Add Player... likely missing a field or invalid data format.");
-//        }
-//    }
-//}
-
-//var fullNFL = {
-//    players2: {},
-//    addPlayer2: function (player2) {
-//        this.players2[player2.id] = player2;
-//    }
-//}
-
-//// roster factory
-//var Player = function (name, position, number, photo, team, status, byeweek, age, id) {
-//    this.name = name;
-//    this.position = position;
-//    this.number = number;
-//    this.photo = photo;
-//    this.team = team;
-//    this.status = status;
-//    this.byeweek = byeweek;
-//    this.age = age;
-//    this.id = id;
-//}
+// end of Betting Service =====================================================
