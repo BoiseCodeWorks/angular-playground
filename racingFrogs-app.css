@@ -1,0 +1,38 @@
+﻿body {
+    background-color: lightblue;
+}
+.button-custom {
+    background-color:lightgreen;
+    display:inline-block;
+}
+.button-custom-top {
+    background-color:lightgreen;
+    display:inline-block;
+    color:darkblue;
+}
+.float-left {
+    display:inline-block;
+    float:left;
+}
+.float-right {
+    display:inline-block;
+    float:right;
+}
+.winner-found {
+    font-size:large;
+    color:red;
+}
+.under-button {
+    font-size:small;
+}
+.bet-history {
+    display:inline-block;
+    float:right;
+}
+#bet-box {
+    width:135px;
+    height:200px;
+    display:inline-block;
+    background-color:paleturquoise;
+    padding:5px;
+}

@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html ng-app="racingFrogs">
+<head>
+    <meta charset="UTF-8">
+    <title>Racing Frogs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="racingFrogs-app.css">
+</head>
+
+<body ng-controller="MainController as vm">
+    {{1 + 1}}
+    <br />
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4><span class="float-left">Welcome to The Frog Races</span></h4>
+                <span class="float-right">
+                    <span class="btn button-custom-top" ng-click="vm.addFrog()">
+                        Add Frog<span class="under-button"><br />(up to 9)</span>
+                    </span>
+                    <span> </span>
+                    <span class="btn button-custom-top" ng-click="vm.removeFrog()">
+                        Remove Frog<span class="under-button"><br />(down to 2)</span>
+                    </span>
+                    <span class="btn button-custom-top" ng-click="vm.practiceHeat()">Practice<br />Heat</span>
+                </span><br /><br /><br />            
+            </div>
+            <div class="panel-body">
+                <table class="race-track" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <td style="width: 15px"> </td>
+                            <td style="width: 55px">| Frog</td>
+                            <td id="raceTrack">
+                                <span class="float-left">| START</span>
+                                <span class="float-right">FINISH |</span>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="frog in vm.frogs">
+                            <td><span>{{frog.lane | number:0}} </span></td>
+                            <td style="border: 1px solid blue; position: relative; background-color:{{frog.color}}">
+                                <span style="color: white"><b>- {{frog.name}}</b></span>
+                            </td>
+                            <td style="border: 1px dashed blue; position: relative">
+                                <div id="frog{{frog.lane}}" style="position: relative">
+                                    <img src="{{frog.picUrl}}" style="background-color:{{frog.color}}" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <span class="float-right winner-found">{{vm.winner}}</span><br />
+            </div>
+        </div>
+
+        <div class="container2">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4><span class="float-left">Betting on the Races (under development)</span></h4><br />
+                </div>
+                <div class="panel-body">
+                    <div id="bet-box">
+                        <div class="float-left">
+                            <!--<span class="btn button-custom" ng-click="vm.newRace()">New Race</span>-->
+                            <p><u><b>Placing Your Bets</b></u><br />Race must be open</p>
+                            <p>Race: <input type="number" id="currentRace" value="1" min="1" max="9" style="width:30px" /></p>
+                            <p>Frog: <input type="text" id="currentFrog" style="width:70px" /></p>
+                            <p>Wager: <input type="number" id="wagerAmount" value="25" min="10" max="999" style="width:58px" /></p>
+                            <center>
+                                <p class="btn button-custom" ng-click="vm.BettingService.placeBet(currentRace, currentFrog, wagerAmount)">Place Bet</p>
+                            </center>
+                        </div>
+                    </div>
+                    <div id="betHistory" class="float-right">
+                        <table class="bet-history" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <td style="width: 45px"><u><b>Race</b></u></td>
+                                    <td style="width: 45px"><u><b>Open</b></u></td>
+                                    <td style="width: 60px"><u><b>Tickets</b></u></td>
+                                    <td style="width: 40px"><u><b>Bets</b></u></td>
+                                    <td style="width: 60px"><u><b>Winner</b></u></td>
+                                    <td style="width: 250px"><u><b>Contestants</b></u></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="race in vm.races">
+                                    <td><span>{{race.id + 1 | number:0}} </span></td>
+                                    <td><span>{{race.open}}</span></td>
+                                    <td><span>{{race.tickets | number:0}} </span></td>
+                                    <td><span>{{race.bets}} </span></td>
+                                    <td><span>{{race.winner}} </span></td>
+                                    <td><span>{{race.contestants}} </span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <span class="btn button-custom" ng-click="vm.startRace()">Run Next Race</span>
+                    <!--<span class="float-right winner-found">{{vm.winner}}</span>-->
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Fun with Joe and Bob
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Joe has {{ vm.joe.cash | currency }}
+                    </p>
+                    <p>
+                        Bob has {{ vm.bob.cash | currency }}
+                    </p>
+                    <p>
+                        The bank has {{ vm.bank | currency }}
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <span class="btn button-custom" ng-click="vm.giveMoneyToJoe()">Give $10 to Joe</span>
+                    <span class="btn button-custom" ng-click="vm.receiveMoneyFromBob()">Receive $5 from Bob</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    Angular Working?  {{vm.working}}
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.6/angular.min.js"></script>
+    <script src="racingFrogs-app.js"></script>
+</body>
+</html>
