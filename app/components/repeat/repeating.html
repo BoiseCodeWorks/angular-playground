@@ -1,90 +1,73 @@
 <small class="alert alert-success">RepeatController Status: {{controller.repeatStatus}}</small>
 <div class="readme">
-  <h1>Help Fix this Cart</h1>
-  <p>What we have here is a broken website. There are a few challenges we need to solve to get it working</p>
-  <p>using the comments in the html and in the controller file as guides you should be able to get this cart back in top notch condition.</p>
-  
-  <p>First things first lets start with the HTML.</p>
-  
-</div>
-<hr>
+  <h1>Repeating html templates</h1>
+  <p>One of the key features of Angular is the ability to easily repeat a snippet of html for each index in an Array or each property in an Object</p>
+	<p>In our controller we have an array of objects on the property data. Using a mix of Angular and HTML we can setup a template and then use the ng-repeat directive to do the rest of the work. However there are a few things to keep in mind.</p>
+	<p>Take a look at our player-card from the previous lesson</p>
+	<pre><code class="language-html" ng-nonbindable prism>
+&lt;div class="player-card"&gt;
+	&lt;button class="btn btn-xs btn-danger remove"&gt;Remove&lt;/button&gt;
+	&lt;div&gt;
+		&lt;img ng-src="player.photo" /&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.name}}&lt;/span&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.position}}&lt;/span&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.number}}&lt;/span&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+	</code></pre>
+	<p>This snippet of HTML is currently setup to render a single player to the screen. Ideally we want all of the players to render using this same basic layout. To hand code each player would be incredibly tedious and labor intensive. </p>
+	<p>Now look at how we can utilize the ng-repeat directive</p>
+		<pre><code class="language-html" ng-nonbindable prism>
+&lt;div class="player-card" ng-repeat="player in controller.players"&gt;
+	&lt;button class="btn btn-xs btn-danger remove"&gt;Remove&lt;/button&gt;
+	&lt;div&gt;
+		&lt;img ng-src="player.photo" /&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.name}}&lt;/span&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.position}}&lt;/span&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;span&gt;{{player.number}}&lt;/span&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+	</code></pre>
+	
+	<p>There are a few key features to point out when using the ng-repeat directive. The first is the order of words we have <b>player in controller.players</b></p>
+	<p>First and formost we have the keyword <b>player</b> specified as the first word our value. This first word is arbitrary and could be called anything. For now just think of it as a variable for the value at i in a for loop</p>
+	<pre><code class="language-javascript" prism>
+for(var i = 0; i < players.length; i++){
+	var player = players[i];
+}
+	</code></pre>
+	<p>Remember that controller.players is going to our controller and accessing the players property that has already been declared.</p>
+	<p>With this setup our html through the use of Angular knows to repeat this same section of html for each index in our players Array on the controller.</p>
+	<hr>
+<!-- Once you have read up on Expressions go ahead and start editing the html below-->
 <div class="ng-exercises">
-  <h1>{{controller.name}}</h1>
-  <p>Items added to your Cart ({{controller.getCount() || 0}})</p>
-  <hr />
-  <p class="alert alert-warning" ng-show="controller.cart.length < 1">
-    You have no items in your cart... Buy something!
-  </p>
-  <table class="table" ng-if="controller.cart.length > 0">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Color</th>
-        <th>Size</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="item in controller.cart">
-        <td>{{item.name}}</td>
-        <td>{{item.color}}</td>
-        <td>{{item.size}}</td>
-        <td>
-          <select ng-model="item.quantity" ng-options="o as o for o in [1,2,3,4,5,6,7,8,9,10]"></select>
-        </td>
-        <!--HElP out the view to make the price of this item display as currency by using a filter-->
-        <td>{{item.price * item.quantity}}</td>
-        <td>
-          <button class="btn btn-xs btn-warning" ng-click=controller.removeItemFromCart(item)>X</button>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td class="text-right">Total:</td>
-        <!--HElP out the view to make the price display as currency by using a filter-->
-        <td>{{controller.calculateCartTotal()}}</td>
-        <td></td>
-      </tr>
-    </tfoot>
-  </table>
-  <hr />
-  <div class="container">
-    <div class="row">
-      <!--
-        - If you were to look at the controller you would notice
-        - we have a propety called store which is an object. 
-        - The store object has a property called items.
-        - Using the Angular ng-repeat directive you will be able to
-        - Render each item in the store on the page 
-        - Remember that ng-repeat sytax is similar to a (for in loop)
-        - Where the first word represents an entire object similarly to the .forEach(function(item))
-        - ** hint: be sure to use item as the first word
-        -->
-      <div ng-repeat="" class="col-sm-4">
-        <div class="shopping-item">
-          <!--HElP out the view to make the price of the item display as currency by using a filter-->
-          <p class="item-price">{{item.price}}</p>
-          <p class="item-name">
-            {{item.name}}</p>
-          <img ng-src="{{item.img}}">
-          <p>
-            <select ng-model="item.selectedColor" ng-options="color.name as color.name for color in item.colors">
-              <option value=''>--Color--</option>
-            </select>
-            <select ng-model="item.selectedSize">
-              <option value=''>--Size--</option>
-              <option ng-repeat="size in item.sizes">{{size}}</option>
-            </select>
-          </p>
-          <button class="btn btn-xs btn-primary" ng-disabled="!item.selectedColor || !item.selectedSize" ng-click="controller.addItemToCart(item)">Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
+	<h1>Exercise</h1>
+	<p>We have a property on the controller called data. controller.data is actually an array of objects where each object has the following properties</p>
+	<ul>
+		<li>title</li>
+		<li>url - image src url</li>
+		<li>link</li>
+	</ul>
+	<p>Fill in the following code to have each of these objects rendered to the page</p>
+	
+	<!--Fill in the ng-repeat-->
+	<div class="comic" ng-repeat=""> <!--controller.data is where the array lives-->
+		<!--ng-src is looking for a set of {{but what goes here?}} -->
+		<img ng-src="" />
+		<!-- ng-href unlike ng-src does not require the double curlies -->
+		<a ng-href="" target="_blank">How do you render the title?</a>
+	</div>
+	
 </div>
