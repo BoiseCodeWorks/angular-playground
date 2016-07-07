@@ -1,6 +1,11 @@
-var app = angular.module('angularPlayground');
+(function () {
+  
+angular.module('angularPlayground')
 
-app.controller('CartController', CartController);
+  .component('cartComponent', {
+    controller: CartController,
+    templateUrl: "/app/components/cart/cart.html"
+  });
 
 
 function CartController(){
@@ -58,3 +63,4 @@ function CartController(){
   }
   
 }
+} ());
