@@ -11,7 +11,7 @@
 <!-- ng-controller Loads a registered controller from our angular App: Naming is crucial -->
 
 <body class="container" ng-controller="MainController as $ctrl">
-	<!--BEING ANGULAR STATUS INDICATOR-->
+	<!--BEGIN ANGULAR STATUS INDICATOR-->
 	<div class="ng-status-container" ng-controller="AngularStatusInidicator as ngStatus">
 		<div class="alert alert-danger" ng-style="{'background-color': '#dff0d8','color': '#3c763d','border-color':'#d6e9c6'}">Angular is: <span class="ng-status" ng-style="{'display': 'inline-block'}">{{ngStatus.angularStatus}}</span><span ng-hide="true">not working</span></div>
 	</div>
@@ -21,7 +21,9 @@
 	<div class="jumbotron text-center">
 		<h1>Playground for <img src="https://angularjs.org/img/AngularJS-large.png" height="70" alt="Angular.js"></h1>
 	</div>
+
 	<div class="panel panel-default" ng-controller="ViewManager as vm">
+		
 		<div class="panel-heading">
 			<ul class="nav nav-pills">
 				<li ng-class="{'active': vm.view === 'home'}"><a href="#home" ng-click="vm.changeView('home')">Home</a></li>
@@ -33,6 +35,7 @@
 				<li ng-class="{'active': vm.view === 'cart'}"><a href="#cart" ng-click="vm.changeView('cart')">Cart Project</a></li>
 			</ul>
 		</div>
+
 		<div class="panel-body">
 
 			<div ng-if="vm.view === 'home'">
@@ -65,7 +68,6 @@
 
 		</div>
 	</div>
-
 
 	<!--Load Asset Libraries-->
 	<!--Notice the order of loading libraries is important JQuery, Bootstrap, Angular-->
