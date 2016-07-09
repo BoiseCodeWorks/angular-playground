@@ -1,13 +1,18 @@
-var app = angular.module('angularPlayground');
+(function () {
+  
+angular.module('angularPlayground')
 
-app.controller('CartController', CartController);
+  .component('cartComponent', {
+    controller: CartController,
+    templateUrl: "/app/components/cart/cart.html"
+  });
 
 
 function CartController(){
   this.cartStatus = 'Working';
-  //The cart is an array of items that we are adding from our view
+  //The cart is an array of items that we are adding to from our view
   this.cart = [];
-  //The store is what we are using to populate our page with
+  //The StoreData.js is the information we are using to populate our page
   this.store = {
     items: StoreData
   };
@@ -29,11 +34,12 @@ function CartController(){
   
   this.removeItemFromCart = function(item){
     //Item gets passed in from our view when the user clicks the x button
+
     /*
     * This function should be able to remove the passed in item
     * from our cart. You will have to first identify where the passed
     * in item is in the array. Then you will need to use the correct
-    * Array.method to remove 1 item hint method(i, 1);
+    * Array.method to remove 1 item ... hint: method(i, 1);
     */
   };
   
@@ -41,20 +47,21 @@ function CartController(){
       //item gets passed in to this function from the view
       
       /*
-      Our cart demands that items being added to it must have the following properties
-      var newItem = {
-        name:'',
-        color:'',
-        size: '',
-        quantity: 1,
-        price:'',
-      }
-      console.log the item being passed in from the view 
-      to figure out which properties from item need to be 
-      remaped to the newItem object. 
-      After building the newItem add it to the cart 
+      *Our cart demands that items being added to it must have the following properties
+      *var newItem = {
+      *  name:'',
+      *  color:'',
+      *  size: '',
+      *  quantity: 1,
+      *  price:'',
+      *}
+      *console.log the item being passed in from the view 
+      *to figure out which properties from the item need to be 
+      *re-maped to the newItem object. 
+      *After building the newItem, add it to the cart. 
       */
       
   }
   
 }
+} ());

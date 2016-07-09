@@ -1,8 +1,11 @@
-var app = angular.module('angularPlayground', ['Prism']);
+(function () {
+    
+angular.module('angularPlayground', ['Prism'])
 
-app.controller('MainController', MainController);
-
+.controller('MainController', MainController);
 
 function MainController(){
 	
 }
+
+}())

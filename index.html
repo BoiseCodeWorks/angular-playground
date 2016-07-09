@@ -10,8 +10,8 @@
 </head>
 <!-- ng-controller Loads a registered controller from our angular App: Naming is crucial -->
 
-<body class="container" ng-controller="MainController as controller">
-	<!--BEING ANGULAR STATUS INDICATOR-->
+<body class="container" ng-controller="MainController as $ctrl">
+	<!--BEGIN ANGULAR STATUS INDICATOR-->
 	<div class="ng-status-container" ng-controller="AngularStatusInidicator as ngStatus">
 		<div class="alert alert-danger" ng-style="{'background-color': '#dff0d8','color': '#3c763d','border-color':'#d6e9c6'}">Angular is: <span class="ng-status" ng-style="{'display': 'inline-block'}">{{ngStatus.angularStatus}}</span><span ng-hide="true">not working</span></div>
 	</div>
@@ -19,9 +19,11 @@
 
 
 	<div class="jumbotron text-center">
-		<h1>Playground for <img src="https://angularjs.org/img/AngularJS-large.png" height="70" alt="Angular.js"></h1>		
+		<h1>Playground for <img src="https://angularjs.org/img/AngularJS-large.png" height="70" alt="Angular.js"></h1>
 	</div>
+
 	<div class="panel panel-default" ng-controller="ViewManager as vm">
+		
 		<div class="panel-heading">
 			<ul class="nav nav-pills">
 				<li ng-class="{'active': vm.view === 'home'}"><a href="#home" ng-click="vm.changeView('home')">Home</a></li>
@@ -33,19 +35,39 @@
 				<li ng-class="{'active': vm.view === 'cart'}"><a href="#cart" ng-click="vm.changeView('cart')">Cart Project</a></li>
 			</ul>
 		</div>
+
 		<div class="panel-body">
-			<div ng-controller="HomeController as controller" ng-include="'app/components/home/home.html'" ng-if="vm.view === 'home'"></div>
-			<div ng-controller="StartController as controller" ng-include="'app/components/start/start.html'" ng-if="vm.view === 'start'"></div>
-			<div ng-controller="ExpressionsController as controller" ng-include="'app/components/expressions/expressions.html'" ng-if="vm.view === 'expressions'"></div>
-			<div ng-controller="BindingsController as controller" ng-include="'app/components/bindings/bindings.html'" ng-if="vm.view === 'bindings'"></div>
-			<div ng-controller="RepeatController as controller" ng-include="'app/components/repeat/repeating.html'" ng-if="vm.view === 'repeat'"></div>
-			<div ng-controller="ControllersController as controller" ng-include="'app/components/controllers/controllers.html'" ng-if="vm.view === 'controllers'"></div>
-			<div ng-controller="CartController as controller" ng-include="'app/components/cart/cart.html'" ng-if="vm.view === 'cart'"></div>
+
+			<div ng-if="vm.view === 'home'">
+				<home-component></home-component>
+			</div>
+
+			<div ng-if="vm.view === 'start'">
+				<start-component></start-component>
+			</div>
+
+			<div ng-if="vm.view === 'expressions'">
+				<expressions-component></expressions-component>
+			</div>
+
+			<div ng-if="vm.view === 'bindings'">
+				<bindings-component></bindings-component>
+			</div>
+
+			<div ng-if="vm.view === 'repeat'">
+				<repeat-component></repeat-component>
+			</div>
+
+			<div ng-if="vm.view === 'controllers'">
+				<controllers-component></controllers-component>
+			</div>
+
+			<div ng-if="vm.view === 'cart'">
+				<cart-component></cart-component>
+			</div>
+
 		</div>
 	</div>
-
-
-
 
 	<!--Load Asset Libraries-->
 	<!--Notice the order of loading libraries is important JQuery, Bootstrap, Angular-->
@@ -59,18 +81,18 @@
 	<script src="app/utilities/angular-status-indicator.js" type="text/javascript"></script>
 	<script src="app/utilities/view-manager.js" type="text/javascript"></script>
 	<script src="app/utilities/ng-prism.js" type="text/javascript"></script>
-	
+
 	<!--Load Custom Services-->
 	<script src="app/components/cart/StoreData.js" type="text/javascript"></script>
-	
+
 	<!--Load Custom Component Controllers-->
-	<script src="app/components/expressions/ExpressionsController.js" type="text/javascript"></script>
-	<script src="app/components/home/HomeController.js" type="text/javascript"></script>
-	<script src="app/components/repeat/RepeatController.js" type="text/javascript"></script>
-	<script src="app/components/cart/CartController.js" type="text/javascript"></script>
-	<script src="app/components/start/StartController.js" type="text/javascript"></script>
-	<script src="app/components/bindings/BindingsController.js" type="text/javascript"></script>
-	<script src="app/components/controllers/ControllersController.js" type="text/javascript"></script>
+	<script src="app/components/expressions/expressionsComponent.js" type="text/javascript"></script>
+	<script src="app/components/home/homeComponent.js" type="text/javascript"></script>
+	<script src="app/components/repeat/repeatComponent.js" type="text/javascript"></script>
+	<script src="app/components/cart/cartComponent.js" type="text/javascript"></script>
+	<script src="app/components/start/startComponent.js" type="text/javascript"></script>
+	<script src="app/components/bindings/bindingsComponent.js" type="text/javascript"></script>
+	<script src="app/components/controllers/controllersComponent.js" type="text/javascript"></script>
 
 </body>
 
