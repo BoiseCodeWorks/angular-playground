@@ -1,14 +1,12 @@
-(function () {
-	
-angular.module('angularPlayground')
+;(function () {
+  angular.module('angularPlayground')
 
-	.component('startComponent', {
-		controller: StartController,
-	templateUrl: "app/components/start/start.html"	
-	});
+    .component('startComponent', {
+      controller: StartController,
+      templateUrl: 'app/components/start/start.html'
+    })
 
-
-function StartController(){
-	this.startStatus = 'Working';
-}
-} ());
+  function StartController () {
+    this.startStatus = 'Working'
+  }
+}())

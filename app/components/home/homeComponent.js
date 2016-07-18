@@ -1,14 +1,12 @@
-(function () {
-	
-angular.module('angularPlayground')
+;(function () {
+  angular.module('angularPlayground')
 
-	.component('homeComponent', {
-		controller: HomeController,
-		templateUrl: "/app/components/home/home.html" 
-	});
+    .component('homeComponent', {
+      controller: HomeController,
+      templateUrl: '/app/components/home/home.html'
+    })
 
-
-function HomeController(){
-	this.homeStatus = 'Working';
-}
-} ());
+  function HomeController () {
+    this.homeStatus = 'Working'
+  }
+}())

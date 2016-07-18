@@ -1,14 +1,12 @@
-(function () {
-	
-	angular.module('angularPlayground')
+;(function () {
+  angular.module('angularPlayground')
 
-		.component('servicesComonent', {
-			controller: ServicesController,
-		templateUrl: "/app/components/services/services.html"
-		});
+    .component('servicesComonent', {
+      controller: ServicesController,
+      templateUrl: '/app/components/services/services.html'
+    })
 
-
-	function ServicesController() {
-		this.servicesStatus = 'Working';
-	}
-} ());
+  function ServicesController () {
+    this.servicesStatus = 'Working'
+  }
+}())
