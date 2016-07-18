@@ -1,8 +1,8 @@
-var app = angular.module('angularPlayground');
+;(function () {
+  angular.module('angularPlayground')
+    .controller('AngularStatusInidicator', AngularStatusInidicator)
 
-app.controller('AngularStatusInidicator', AngularStatusInidicator);
-
-
-function AngularStatusInidicator($scope){
-	this.angularStatus = 'Working';
-}
+  function AngularStatusInidicator ($scope) {
+    this.angularStatus = 'Working'
+  }
+}())

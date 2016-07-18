@@ -1,21 +1,21 @@
-<small class="alert alert-success">CartController Status: {{controller.cartStatus}}</small>
+<small class="alert alert-success">cartComponent Status: {{$ctrl.cartStatus}}</small>
 <div class="readme">
   <h1>Help Fix this Cart</h1>
-  <p>What we have here is a broken website. There are a few challenges we need to solve to get it working</p>
-  <p>using the comments in the html and in the controller file as guides you should be able to get this cart back in top notch condition.</p>
+  <p>What we have here is a broken website. There are a few challenges we need to solve to get it working.</p>
+  <p>use the comments in the .html and in the component file as guides. Following these clues, you should be able to get this cart back into top notch condition.</p>
   
-  <p>First things first lets start with the HTML.</p>
+  <p>First things first, lets start with the HTML.</p>
   
 </div>
 <hr>
 <div class="ng-exercises">
-  <h1>{{controller.name}}</h1>
-  <p>Items added to your Cart ({{controller.getCount() || 0}})</p>
+  <h1>{{component.name}}</h1>
+  <p>Items added to your Cart ({{component.getCount() || 0}})</p>
   <hr />
-  <p class="alert alert-warning" ng-show="controller.cart.length < 1">
+  <p class="alert alert-warning" ng-show="component.cart.length < 1">
     You have no items in your cart... Buy something!
   </p>
-  <table class="table" ng-if="controller.cart.length > 0">
+  <table class="table" ng-if="component.cart.length > 0">
     <thead>
       <tr>
         <th>Item</th>
@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="item in controller.cart">
+      <tr ng-repeat="item in component.cart">
         <td>{{item.name}}</td>
         <td>{{item.color}}</td>
         <td>{{item.size}}</td>
@@ -37,7 +37,7 @@
         <!--HElP out the view to make the price of this item display as currency by using a filter-->
         <td>{{item.price * item.quantity}}</td>
         <td>
-          <button class="btn btn-xs btn-warning" ng-click=controller.removeItemFromCart(item)>X</button>
+          <button class="btn btn-xs btn-warning" ng-click=component.removeItemFromCart(item)>X</button>
         </td>
       </tr>
     </tbody>
@@ -48,7 +48,7 @@
         <td></td>
         <td class="text-right">Total:</td>
         <!--HElP out the view to make the price display as currency by using a filter-->
-        <td>{{controller.calculateCartTotal()}}</td>
+        <td>{{component.calculateCartTotal()}}</td>
         <td></td>
       </tr>
     </tfoot>
@@ -57,7 +57,7 @@
   <div class="container">
     <div class="row">
       <!--
-        - If you were to look at the controller you would notice
+        - If you were to look at the component you would notice
         - we have a propety called store which is an object. 
         - The store object has a property called items.
         - Using the Angular ng-repeat directive you will be able to
@@ -82,7 +82,7 @@
               <option ng-repeat="size in item.sizes">{{size}}</option>
             </select>
           </p>
-          <button class="btn btn-xs btn-primary" ng-disabled="!item.selectedColor || !item.selectedSize" ng-click="controller.addItemToCart(item)">Add</button>
+          <button class="btn btn-xs btn-primary" ng-disabled="!item.selectedColor || !item.selectedSize" ng-click="component.addItemToCart(item)">Add</button>
         </div>
       </div>
     </div>

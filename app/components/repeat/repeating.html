@@ -1,8 +1,8 @@
-<small class="alert alert-success">RepeatController Status: {{controller.repeatStatus}}</small>
+<small class="alert alert-success">repeatComponent Status: {{$ctrl.repeatStatus}}</small>
 <div class="readme">
   <h1>Repeating html templates</h1>
   <p>One of the key features of Angular is the ability to easily repeat a snippet of html for each index in an Array or each property in an Object</p>
-	<p>In our controller we have an array of objects on the property data. Using a mix of Angular and HTML we can setup a template and then use the ng-repeat directive to do the rest of the work. However there are a few things to keep in mind.</p>
+	<p>In our components controller, we have an array of objects on the property data. Using a mix of Angular and HTML we can setup a template and then use the ng-repeat directive to do the rest of the work. However there are a few things to keep in mind.</p>
 	<p>Take a look at our player-card from the previous lesson</p>
 	<pre><code class="language-html" ng-nonbindable prism>
 &lt;div class="player-card"&gt;
@@ -21,10 +21,10 @@
 	&lt;/div&gt;
 &lt;/div&gt;
 	</code></pre>
-	<p>This snippet of HTML is currently setup to render a single player to the screen. Ideally we want all of the players to render using this same basic layout. To hand code each player would be incredibly tedious and labor intensive. </p>
-	<p>Now look at how we can utilize the ng-repeat directive</p>
+	<p>This snippet of HTML is currently set up to render a single player to the screen. Ideally we want all of the players to render using this same basic layout. To hand code each player would be incredibly tedious and labor intensive. </p>
+	<p>Now look at how we can utilize the ng-repeat directive.</p>
 		<pre><code class="language-html" ng-nonbindable prism>
-&lt;div class="player-card" ng-repeat="player in controller.players"&gt;
+&lt;div class="player-card" ng-repeat="player in $ctrl.players"&gt;
 	&lt;button class="btn btn-xs btn-danger remove"&gt;Remove&lt;/button&gt;
 	&lt;div&gt;
 		&lt;img ng-src="player.photo" /&gt;
@@ -41,32 +41,32 @@
 &lt;/div&gt;
 	</code></pre>
 	
-	<p>There are a few key features to point out when using the ng-repeat directive. The first is the order of words we have <b>player in controller.players</b></p>
-	<p>First and formost we have the keyword <b>player</b> specified as the first word our value. This first word is arbitrary and could be called anything. For now just think of it as a variable for the value at i in a for loop</p>
+	<p>There are a few key features to point out when using the ng-repeat directive. The first is the order of words we have <b>player in $ctrl.players</b></p>
+	<p>First and formost we have the keyword <b>player</b> specified as the first word of our statement. This first word is arbitrary and could be called anything. For now just think of it as a variable like the value at i in a for loop.</p>
 	<pre><code class="language-javascript" prism>
 for(var i = 0; i < players.length; i++){
 	var player = players[i];
 }
 	</code></pre>
-	<p>Remember that controller.players is going to our controller and accessing the players property that has already been declared.</p>
-	<p>With this setup our html through the use of Angular knows to repeat this same section of html for each index in our players Array on the controller.</p>
+	<p>Remember that $ctrl.players is going to our controller and accessing the players property that has already been declared.</p>
+	<p>With this setup, our html (through the magic of Angular) knows to repeat this same section of html for each index in our players array in the component.</p>
 	<hr>
 <!-- Once you have read up on Expressions go ahead and start editing the html below-->
 <div class="ng-exercises">
 	<h1>Exercise</h1>
-	<p>We have a property on the controller called data. controller.data is actually an array of objects where each object has the following properties</p>
+	<p>We have a property on the controller called data. $ctrl.data is actually an array of objects where each object has the following properties</p>
 	<ul>
 		<li>title</li>
 		<li>url - image src url</li>
 		<li>link</li>
 	</ul>
-	<p>Fill in the following code to have each of these objects rendered to the page</p>
+	<p>Fill in the following code to have each of these objects rendered to the page.</p>
 	
 	<!--Fill in the ng-repeat-->
-	<div class="comic" ng-repeat=""> <!--controller.data is where the array lives-->
-		<!--ng-src is looking for a set of {{but what goes here?}} -->
+	<div class="comic" ng-repeat=""> <!--$ctrl.data is where the array lives-->
+		<!--ng-src is looking for a set of {{}} but what goes inside? -->
 		<img ng-src="" />
-		<!--ng-href is looking for a set of {{}} as well but what goes here? -->
+		<!--ng-href is looking for a set of {{}} as well but what goes in them? -->
 		<a ng-href="" target="_blank">How do you render the title?</a>
 	</div>
 	
