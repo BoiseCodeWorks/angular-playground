@@ -1,7 +1,7 @@
 (function () {
     
 angular.module('angularPlayground', ['Prism', 'ui.router'])
-.constant('navStates', ['home', 'start', 'expressions', 'bindings', 'repeat', 'cart'])
+.constant('navStates', ['home', 'start', 'expressions', 'bindings', 'controllers', 'repeat', 'cart'])
 .config(function($stateProvider, navStates){
 
 	navStates.forEach(function(state){
